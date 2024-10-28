@@ -4,27 +4,36 @@ import 'leaflet/dist/leaflet.css'
 
 import { LatLngExpression } from 'leaflet'
 import { MapContainer, TileLayer, Popup, Polyline, Marker } from 'react-leaflet'
-import Image from 'next/image'
+import { AllMaps, MapType } from '@/types/allMaps'
+import YGWYS from './YGWYS'
 
 type Props = {
   className: string
+  locations: AllMaps[]
 }
 
-const Map = ({ className }: Props) => {
-  const center: LatLngExpression = [64.128288, -21.827774]
-  const antwerp: LatLngExpression = [51.21989, 4.40346]
-  const palermo: LatLngExpression = [38.116669, 13.366667]
-
-  const polylineCenterAntwerp: LatLngExpression[] = [center, antwerp]
-  const polylineAntwerpPalermo: LatLngExpression[] = [antwerp, palermo]
-
+const Map = ({ className, locations }: Props) => {
   const limeOptions = { color: 'lime' }
   const redOptions = { color: 'red', dashArray: '5, 5' }
+
+  const getPolyLine = (location: AllMaps, options: any) => (
+    <Polyline
+      key={location.id}
+      pathOptions={options}
+      positions={[
+        [location.startlocatie.latitude, location.startlocatie.longitude],
+        [location.eindlocatie.latitude, location.eindlocatie.longitude],
+      ]}
+    />
+  )
 
   return (
     <MapContainer
       className={className}
-      center={center}
+      center={[
+        locations[0].startlocatie.latitude,
+        locations[0].startlocatie.longitude,
+      ]}
       zoom={4}
       scrollWheelZoom={true}
     >
@@ -32,27 +41,27 @@ const Map = ({ className }: Props) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={center}>
-        <Popup minWidth={500}>
-          <Image
-            src="/reykjavik.jpg"
-            alt="reykjavik"
-            width={1000}
-            height={1000}
-            className="mb-4"
-          />
-          Reykjavik
-        </Popup>
-      </Marker>
-      <Marker position={antwerp}>
-        <Popup>Antwerp</Popup>
-      </Marker>
-      <Marker position={palermo}>
-        <Popup>Palermo</Popup>
-      </Marker>
-
-      <Polyline pathOptions={limeOptions} positions={polylineCenterAntwerp} />
-      <Polyline pathOptions={redOptions} positions={polylineAntwerpPalermo} />
+      {locations.map(location => {
+        if (location.mapType === MapType.MARKER) {
+          return (
+            <Marker
+              key={location.id}
+              position={[
+                location.startlocatie.latitude,
+                location.startlocatie.longitude,
+              ]}
+            >
+              <Popup minWidth={500}>
+                <YGWYS text={location.beschrijving} />
+              </Popup>
+            </Marker>
+          )
+        } else if (location.mapType === MapType.LIJN) {
+          return getPolyLine(location, limeOptions)
+        } else if (location.mapType === MapType.STIPPELLIJN) {
+          return getPolyLine(location, redOptions)
+        }
+      })}
     </MapContainer>
   )
 }
