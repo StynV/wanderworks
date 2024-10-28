@@ -13,10 +13,13 @@ type Props = {
 const Map = ({ className }: Props) => {
   const center: LatLngExpression = [64.128288, -21.827774]
   const antwerp: LatLngExpression = [51.21989, 4.40346]
+  const palermo: LatLngExpression = [38.116669, 13.366667]
 
-  const polyline: LatLngExpression[] = [center, antwerp]
+  const polylineCenterAntwerp: LatLngExpression[] = [center, antwerp]
+  const polylineAntwerpPalermo: LatLngExpression[] = [antwerp, palermo]
 
   const limeOptions = { color: 'lime' }
+  const redOptions = { color: 'red', dashArray: '5, 5' }
 
   return (
     <MapContainer
@@ -44,7 +47,12 @@ const Map = ({ className }: Props) => {
       <Marker position={antwerp}>
         <Popup>Antwerp</Popup>
       </Marker>
-      <Polyline pathOptions={limeOptions} positions={polyline} />
+      <Marker position={palermo}>
+        <Popup>Palermo</Popup>
+      </Marker>
+
+      <Polyline pathOptions={limeOptions} positions={polylineCenterAntwerp} />
+      <Polyline pathOptions={redOptions} positions={polylineAntwerpPalermo} />
     </MapContainer>
   )
 }
