@@ -52,16 +52,15 @@ const Navbar = () => {
   return (
     <>
       <Sheet>
-        <SheetTrigger asChild className="flex flex-row justify-end w-full">
+        <SheetTrigger asChild className="absolute top-4 left-80 z-50 w-full">
           <div>
-            <Button variant="outline" size="icon" className="lg:hidden">
+            <Button variant="secondary" size="icon" className="lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth="1.5"
+                strokeWidth="2"
                 stroke="currentColor"
-                className="size-20"
               >
                 <path
                   strokeLinecap="round"
