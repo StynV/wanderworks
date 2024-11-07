@@ -52,7 +52,7 @@ const Navbar = () => {
   return (
     <>
       <Sheet>
-        <SheetTrigger asChild className="absolute top-4 left-80 z-50 w-full">
+        <SheetTrigger asChild className="absolute top-4 left-80 z-50">
           <div>
             <Button variant="secondary" size="icon" className="lg:hidden">
               <svg
