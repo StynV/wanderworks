@@ -2,7 +2,6 @@
 
 import 'leaflet/dist/leaflet.css'
 
-import { LatLngExpression } from 'leaflet'
 import { MapContainer, TileLayer, Popup, Polyline, Marker } from 'react-leaflet'
 import { AllMaps, MapType } from '@/types/allMaps'
 import YGWYS from './YGWYS'
