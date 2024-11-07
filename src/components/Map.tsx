@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css'
 import { MapContainer, TileLayer, Popup, Polyline, Marker } from 'react-leaflet'
 import { AllMaps, MapType } from '@/types/allMaps'
 import YGWYS from './YGWYS'
+import { useMediaQuery } from 'react-responsive'
 
 type Props = {
   className: string
@@ -12,6 +13,8 @@ type Props = {
 }
 
 const Map = ({ className, locations }: Props) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 })
+
   const limeOptions = { color: 'lime' }
   const redOptions = { color: 'red', dashArray: '5, 5' }
 
@@ -33,7 +36,7 @@ const Map = ({ className, locations }: Props) => {
         locations[0].startlocatie.latitude,
         locations[0].startlocatie.longitude,
       ]}
-      zoom={4}
+      zoom={isMobile ? 3 : 4}
       scrollWheelZoom={true}
     >
       <TileLayer
