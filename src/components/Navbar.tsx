@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 
+import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -9,7 +10,6 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Button } from '@/components/ui/button'
 
 const Navbar = () => {
   const linkClassName = 'flex w-full items-center py-2 text-lg font-semibold'

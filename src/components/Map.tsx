@@ -1,11 +1,13 @@
 'use client'
 
-import 'leaflet/dist/leaflet.css'
-
-import { MapContainer, TileLayer, Popup, Polyline, Marker } from 'react-leaflet'
-import { AllMaps, MapType } from '@/types/allMaps'
-import YGWYS from './YGWYS'
+import { MapContainer, Marker, Polyline, Popup, TileLayer } from 'react-leaflet'
 import { useMediaQuery } from 'react-responsive'
+
+import { AllMaps, MapType } from '@/types/allMaps'
+
+import YGWYS from './YGWYS'
+
+import 'leaflet/dist/leaflet.css'
 
 type Props = {
   className: string
